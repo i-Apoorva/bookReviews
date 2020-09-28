@@ -15,17 +15,21 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/books', async function(req, res) {
+  try{
 let searchTerm= req.query.search;
 const result = await gr.searchBooks( { q: searchTerm, page: 1, field: 'title' } );
 let books= result.search.results.work;
 res.render('books', {books});
+  }catch(err){
+    res.send(err)
+  }
 })
 
 router.get('/reviews', async function(req,res){
 const bookId= req.query.bookId;
 let book= await gr.showBook(bookId)
 const reviewData = book.book.reviews_widget;
- res.send('reviews', reviewData)
+ res.render('reviews', {reviewData})
 })
 
 
