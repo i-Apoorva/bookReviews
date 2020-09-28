@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> books results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+    <!-- CSS  -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="stylesheets/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"></a>
+        </div>
+    </nav>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <div class="row center">
+                <h5>Top results are: </h5>
+                <ul>
+                    <% for (var i = 0; i <books.length ; i++) { %>
+                    <li>
+                        <div class="card border-info mb-3">
+                            <div class="card-header">
+                                <h5 class="card-title"> <%= i+1%>. <%= books[i].best_book.title %></h5>
+                            </div>
+                            <div class="card-body">
+            
+                                <img class="card-img-top" src="<%=books[i].best_book.image_url%>" alt="thumbnail">
+            
+                                <p class="card-text"> <b>By:</b> <%= books[i].best_book.author.name%></p>
+                                <p class="card-text"><b>Rating:</b> <%= books[i].average_rating%>, <b>ratings count:</b> <%= books[i].ratings_count._ %>, <b>text_reviews: </b> <%= books[i].text_reviews_count._ %></p>
+                
+                                <p class="card-text"><b>Published Date: </b><%= books[i].original_publication_day._ %> /<%= books[i].original_publication_month._ %>/<%= books[i].original_publication_year._ %></p>
+                            
+                            
+                                <form action="/reviews" method="GET">
+                                <input type="hidden" name="bookId" value=<%=books[i].best_book.id._ %>>
+                                <button type="submit "class="btn btn-primary">Get Reviews</button>
+                                </form>
+                                
+            
+                            </div>
+                        </div>
+                    </li>
+            
+                    <% }%>
+                </ul>
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
